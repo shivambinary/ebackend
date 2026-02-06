@@ -31,21 +31,25 @@ export const create = async (req, res, next) => {
 
 
 export const update = async (req, res, next) => {
-    try {
-        const product = await updateProduct(req.body);
-        res
-    } catch (err) {
-        next (err);
-    }
+  try {
+    const product = await updateProduct(
+      req.params.id,
+      req.body
+    );
+    res.status(200).json(new ApiResponse(200, product));
+  } catch (err) {
+    next(err);
+  }
 };
 
+
 export const remove = async (req, res, next) => {
-    try {
-        const product = await deleteProduct(req.body);
-        res.status(200).json(new ApiResponse(200, product));
-    } catch (err) {
-        next(err);
-    }
+  try {
+    const product = await deleteProduct(req.params.id);
+    res.status(200).json(new ApiResponse(200, product));
+  } catch (err) {
+    next(err);
+  }
 };
 
 
